@@ -93,7 +93,7 @@ footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <div class="hero-in">
 <div class="kicker">GUNPLA_GLOBAL ｜ 〇〇の歴史</div>
 <h1>ガンプラ<br><em>歴史</em>データベース</h1>
-<p class="lead">YouTube「Gunpla_Global」の「〇〇の歴史」シリーズを、写真・箱絵・発売年月・値段と動画で、全部見られるまとめです。再販・新商品の情報も。</p>
+<p class="lead">YouTube「Gunpla_Global」の「〇〇の歴史」シリーズを、写真・箱絵・発売年月・値段と動画で、全部見られるまとめです。新商品の情報も。</p>
 <nav class="tabs" id="nav"></nav>
 </div>
 </header>
@@ -157,18 +157,18 @@ async function renderHome(){
  const thumbs=await Promise.all(index.map(async s=>{const d=await load(s.key);const r=d.rows.find(r=>r.img)||{};return [s.key,r.img]}));const th=Object.fromEntries(thumbs);
  const sai=await load("saihan");
  const today=new Date().toISOString().slice(0,10);const next=sai.rows.filter(r=>r.date>=today).slice(0,6);
- $("#home").innerHTML=`<h2 class="hgroup">${esc(sai.month||"")} 再販・新商品</h2>${sai.rows.length?`<div class="salist">${(next.length?next:sai.rows.slice(0,6)).map(r=>`<div class="sarow"><span class="tag">${Number(r.date.slice(5,7))}/${Number(r.date.slice(8))}</span><span class="saname">${esc(r.name)}</span>${r.series?`<a class="watch" href="#/${r.series}?t=${r.t}">▶ 動画</a>`:""}</div>`).join("")}</div><p><a href="#/saihan">${esc(sai.month)}の再販・新商品を全部見る（${sai.rows.length}件）→</a></p>`:`<div class="empty">再販・新商品の情報は、準備中です。</div>`}`+
+ $("#home").innerHTML=`<h2 class="hgroup">${esc(sai.month||"")} 新商品</h2>${sai.rows.length?`<div class="salist">${(next.length?next:sai.rows.slice(0,6)).map(r=>`<div class="sarow"><span class="tag">${Number(r.date.slice(5,7))}/${Number(r.date.slice(8))}</span><span class="saname">${esc(r.name)}</span>${r.series?`<a class="watch" href="#/${r.series}?t=${r.t}">▶ 動画</a>`:""}</div>`).join("")}</div><p><a href="#/saihan">${esc(sai.month)}の新商品を全部見る（${sai.rows.length}件）→</a></p>`:`<div class="empty">新商品の情報は、準備中です。</div>`}`+
   Object.entries(groups).map(([g,ss])=>`<h2 class="hgroup">${esc(g)}</h2><div class="sgrid">${ss.map(s=>`<a class="scard" href="#/${s.key}"><div class="ph">${th[s.key]?`<img class="main" loading="lazy" src="${esc(th[s.key])}" alt="">`:""}<span class="no">${s.count}件</span></div><div class="ttl">${esc(s.title)}<small>写真・年月・動画つき</small></div></a>`).join("")}</div>`).join("");
 }
 async function renderSaihan(){
  const d=await load("saihan");const days={};for(const r of d.rows)(days[r.date]=days[r.date]||[]).push(r);
  const wd=t=>"日月火水木金土"[new Date(t+"T00:00:00").getDay()];
- $("#saihan").innerHTML=`<div class="sh"><h2>${esc(d.month||"")} 再販・新商品</h2><a class="back" href="#/">← トップにもどる</a></div>`+
- (d.rows.length?`<p class="lead" style="margin-bottom:14px">${esc(d.note)}。出典: <a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(d.source_name)}</a>（${esc(d.updated)} 時点）。「▶ 動画」は、そのキットが出てくる「〇〇の歴史」の場面です。</p>`+
+ $("#saihan").innerHTML=`<div class="sh"><h2>${esc(d.month||"")} 新商品</h2><a class="back" href="#/">← トップにもどる</a></div>`+
+ (d.rows.length?`<p class="lead" style="margin-bottom:14px">${esc(d.note)}。出典: <a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(d.source_name)}</a>（${esc(d.updated)} 時点）。「▶ 動画」は、そのキットのシリーズが出てくる「〇〇の歴史」の場面です。</p>`+
  Object.entries(days).sort().map(([day,rs])=>`<h3 class="sec">${Number(day.slice(5,7))}月${Number(day.slice(8))}日（${wd(day)}）<small style="font-family:'Noto Sans JP';font-size:13px;color:var(--dim);margin-left:8px">${esc(rs[0].kind)}・${rs.length}件</small></h3><div class="salist">${rs.map(r=>`<div class="sarow"><span class="saname">${esc(r.name)}</span>${r.delay?'<span class="tag">延期分</span>':""}${r.series?`<a class="watch" href="#/${r.series}?t=${r.t}">▶ 動画 ${ts(r.t)}</a>`:""}</div>`).join("")}</div>`).join("")
  :`<div class="empty">準備中です。</div>`);
 }
-function nav(k){$("#nav").innerHTML=`<a class="tab" href="#/" ${!set&&k!=="saihan"?'aria-selected="true"':""}><span>トップ</span></a><a class="tab" href="#/saihan" ${k==="saihan"?'aria-selected="true"':""}><span>再販・新商品</span></a>`+(set?`<a class="tab" aria-selected="true"><span>${esc(cache[set]?.title||"")}</span></a>`:"")}
+function nav(k){$("#nav").innerHTML=`<a class="tab" href="#/" ${!set&&k!=="saihan"?'aria-selected="true"':""}><span>トップ</span></a><a class="tab" href="#/saihan" ${k==="saihan"?'aria-selected="true"':""}><span>新商品</span></a>`+(set?`<a class="tab" aria-selected="true"><span>${esc(cache[set]?.title||"")}</span></a>`:"")}
 async function route(){
  if(!index.length)index=await (await fetch("data/index.json")).json();
  const [k,qs]=location.hash.replace(/^#\/?/,"").split("?");const st=Number(new URLSearchParams(qs||"").get("t"))||0;set=index.some(s=>s.key===k)?k:null;
