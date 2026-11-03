@@ -77,6 +77,10 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 56px}
 table.sai{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
 table.sai td,table.sai th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
 body.sub .hero-in{padding:18px 16px 14px}body.sub h1{font-size:clamp(22px,3.4vw,30px)}body.sub h1 br{display:none}body.sub .lead,body.sub .kicker{display:none}body.sub .tabs{margin-top:10px}
+.salist{display:grid;gap:6px}
+.sarow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.saname{font-weight:700;flex:1 1 220px}
+.tag{font-size:11.5px;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:0 8px}
 footer{border-top:1px solid var(--line);color:var(--dim);font-size:13px}
 footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 .theme{position:absolute;right:16px;top:16px;font:inherit;font-size:12px;background:var(--panel);color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
@@ -152,19 +156,24 @@ async function renderHome(){
  const groups={};for(const s of index)(groups[s.group]=groups[s.group]||[]).push(s);
  const thumbs=await Promise.all(index.map(async s=>{const d=await load(s.key);const r=d.rows.find(r=>r.img)||{};return [s.key,r.img]}));const th=Object.fromEntries(thumbs);
  const sai=await load("saihan");
- $("#home").innerHTML=`<h2 class="hgroup">再販・新商品</h2>${sai.rows.length?`<p><a href="#/saihan">再販・新商品の一覧を見る →</a></p>`:`<div class="empty">再販・新商品の情報は、準備中です。</div>`}`+
+ const today=new Date().toISOString().slice(0,10);const next=sai.rows.filter(r=>r.date>=today).slice(0,6);
+ $("#home").innerHTML=`<h2 class="hgroup">${esc(sai.month||"")} 再販・新商品</h2>${sai.rows.length?`<div class="salist">${(next.length?next:sai.rows.slice(0,6)).map(r=>`<div class="sarow"><span class="tag">${Number(r.date.slice(5,7))}/${Number(r.date.slice(8))}</span><span class="saname">${esc(r.name)}</span>${r.series?`<a class="watch" href="#/${r.series}?t=${r.t}">▶ 動画</a>`:""}</div>`).join("")}</div><p><a href="#/saihan">${esc(sai.month)}の再販・新商品を全部見る（${sai.rows.length}件）→</a></p>`:`<div class="empty">再販・新商品の情報は、準備中です。</div>`}`+
   Object.entries(groups).map(([g,ss])=>`<h2 class="hgroup">${esc(g)}</h2><div class="sgrid">${ss.map(s=>`<a class="scard" href="#/${s.key}"><div class="ph">${th[s.key]?`<img class="main" loading="lazy" src="${esc(th[s.key])}" alt="">`:""}<span class="no">${s.count}件</span></div><div class="ttl">${esc(s.title)}<small>写真・年月・動画つき</small></div></a>`).join("")}</div>`).join("");
 }
 async function renderSaihan(){
- const d=await load("saihan");
- $("#saihan").innerHTML=`<div class="sh"><h2>再販・新商品</h2><a class="back" href="#/">← 一覧にもどる</a></div>`+(d.rows.length?`<table class="sai"><tr><th>日付</th><th>商品</th><th>種類</th></tr>${d.rows.map(r=>`<tr><td>${esc(r.date)}</td><td>${r.url?`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a>`:esc(r.name)}</td><td>${esc(r.kind)}</td></tr>`).join("")}</table>`:`<div class="empty">準備中です。</div>`);
+ const d=await load("saihan");const days={};for(const r of d.rows)(days[r.date]=days[r.date]||[]).push(r);
+ const wd=t=>"日月火水木金土"[new Date(t+"T00:00:00").getDay()];
+ $("#saihan").innerHTML=`<div class="sh"><h2>${esc(d.month||"")} 再販・新商品</h2><a class="back" href="#/">← トップにもどる</a></div>`+
+ (d.rows.length?`<p class="lead" style="margin-bottom:14px">${esc(d.note)}。出典: <a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(d.source_name)}</a>（${esc(d.updated)} 時点）。「▶ 動画」は、そのキットが出てくる「〇〇の歴史」の場面です。</p>`+
+ Object.entries(days).sort().map(([day,rs])=>`<h3 class="sec">${Number(day.slice(5,7))}月${Number(day.slice(8))}日（${wd(day)}）<small style="font-family:'Noto Sans JP';font-size:13px;color:var(--dim);margin-left:8px">${esc(rs[0].kind)}・${rs.length}件</small></h3><div class="salist">${rs.map(r=>`<div class="sarow"><span class="saname">${esc(r.name)}</span>${r.delay?'<span class="tag">延期分</span>':""}${r.series?`<a class="watch" href="#/${r.series}?t=${r.t}">▶ 動画 ${ts(r.t)}</a>`:""}</div>`).join("")}</div>`).join("")
+ :`<div class="empty">準備中です。</div>`);
 }
 function nav(k){$("#nav").innerHTML=`<a class="tab" href="#/" ${!set&&k!=="saihan"?'aria-selected="true"':""}><span>トップ</span></a><a class="tab" href="#/saihan" ${k==="saihan"?'aria-selected="true"':""}><span>再販・新商品</span></a>`+(set?`<a class="tab" aria-selected="true"><span>${esc(cache[set]?.title||"")}</span></a>`:"")}
 async function route(){
  if(!index.length)index=await (await fetch("data/index.json")).json();
- const k=location.hash.replace(/^#\/?/,"");set=index.some(s=>s.key===k)?k:null;
+ const [k,qs]=location.hash.replace(/^#\/?/,"").split("?");const st=Number(new URLSearchParams(qs||"").get("t"))||0;set=index.some(s=>s.key===k)?k:null;
  $("#home").hidden=!!(set||k==="saihan");$("#series").hidden=!set;$("#saihan").hidden=k!=="saihan";document.body.classList.toggle("sub",!!(set||k==="saihan"));if(set)await load(set);nav(k);
- if(set){$("#q").value="";$("#decade").value="";await renderList();openVideo(cache[set].video,0,false);window.scrollTo(0,0)}
+ if(set){$("#q").value="";$("#decade").value="";await renderList();openVideo(cache[set].video,st,!!st);window.scrollTo(0,0)}
  else if(k==="saihan")renderSaihan();else renderHome();
 }
 $("#q").oninput=renderList;$("#decade").onchange=renderList;window.onhashchange=route;
