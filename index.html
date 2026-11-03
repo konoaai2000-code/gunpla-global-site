@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SDガンダム全番号リスト｜Gunpla_Global</title>
-<meta name="description" content="BB戦士（全428種）と元祖SDガンダム（全259種）を番号の順に。写真・箱絵・発売年月・値段・特徴と、YouTube 動画のその場面へのリンク。">
-<meta property="og:title" content="SDガンダム全番号リスト｜Gunpla_Global">
-<meta property="og:description" content="BB戦士 全428種・元祖SDガンダム 全259種を番号の順に全部。">
+<title>ガンプラ歴史データベース｜Gunpla_Global</title>
+<meta name="description" content="BB戦士・元祖SDガンダム・RX-78-2・ザク・νガンダム・SEED・METAL BUILD など、ガンプラの歴史を全部見られるデータベース。写真・箱絵・発売年月・値段・再販情報と、YouTube 動画のその場面へ。">
+<meta property="og:title" content="ガンプラ歴史データベース｜Gunpla_Global">
+<meta property="og:description" content="ガンプラの歴史を、写真と動画で全部。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="config.js"></script>
@@ -30,7 +30,7 @@ h1{font-family:"Dela Gothic One","Noto Sans JP",sans-serif;font-weight:400;font-
 h1 em{font-style:normal;color:var(--red2)}
 .lead{color:var(--dim);margin:0;max-width:640px}
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.tab{font:inherit;font-weight:900;border:2px solid var(--line);background:var(--panel);color:var(--text);padding:10px 18px;border-radius:10px;cursor:pointer;transform:skewX(-8deg)}
+.tab{text-decoration:none;font:inherit;font-weight:900;border:2px solid var(--line);background:var(--panel);color:var(--text);padding:10px 18px;border-radius:10px;cursor:pointer;transform:skewX(-8deg)}
 .tab span{display:inline-block;transform:skewX(8deg)}
 .tab small{color:var(--dim);font-weight:700;margin-left:6px}
 .tab[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#fff}
@@ -61,6 +61,22 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 56px}
 .watch{font-size:13px;font-weight:900;color:#fff;background:var(--red);text-decoration:none;border-radius:999px;padding:4px 12px;white-space:nowrap}
 .credit{font-size:10.5px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .credit a{text-decoration:none}
+.player{position:relative;aspect-ratio:16/9;max-width:860px;margin:0 auto 14px;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.player iframe,#yt{position:absolute;inset:0;width:100%;height:100%;border:0}
+.hgroup{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:20px;margin:28px 0 12px;padding-left:12px;border-left:6px solid var(--red)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.scard{display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .15s,border-color .15s}
+.scard:hover{transform:translateY(-3px);border-color:var(--red)}
+.scard .ph{aspect-ratio:16/10}
+.scard .ttl{padding:10px 12px;font-weight:900}
+.scard .ttl small{display:block;color:var(--dim);font-weight:700;font-size:12.5px}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--dim)}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:6px 0 12px}
+.sh h2{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:26px;margin:0}
+.back{font-size:14px;color:var(--dim);text-decoration:none}
+table.sai{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
+table.sai td,table.sai th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+body.sub .hero-in{padding:18px 16px 14px}body.sub h1{font-size:clamp(22px,3.4vw,30px)}body.sub h1 br{display:none}body.sub .lead,body.sub .kicker{display:none}body.sub .tabs{margin-top:10px}
 footer{border-top:1px solid var(--line);color:var(--dim);font-size:13px}
 footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 .theme{position:absolute;right:16px;top:16px;font:inherit;font-size:12px;background:var(--panel);color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
@@ -72,15 +88,15 @@ footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <button class="theme" id="theme">明るく表示</button>
 <div class="hero-in">
 <div class="kicker">GUNPLA_GLOBAL ｜ 〇〇の歴史</div>
-<h1>SDガンダム<br><em>全番号</em>リスト</h1>
-<p class="lead">BB戦士・元祖SDガンダムを、番号の順に全部。写真・箱絵・発売年月・値段と、YouTube 動画のその場面へのリンクつき。</p>
-<div class="tabs" role="tablist">
-<button class="tab" role="tab" data-set="bb" aria-selected="true"><span>BB戦士<small>全428種</small></span></button>
-<button class="tab" role="tab" data-set="ganso" aria-selected="false"><span>元祖SDガンダム<small>全259種</small></span></button>
-</div>
+<h1>ガンプラ<br><em>歴史</em>データベース</h1>
+<p class="lead">YouTube「Gunpla_Global」の「〇〇の歴史」シリーズを、写真・箱絵・発売年月・値段と動画で、全部見られるまとめです。再販・新商品の情報も。</p>
+<nav class="tabs" id="nav"></nav>
 </div>
 </header>
 <main>
+<section id="home"></section>
+<section id="series" hidden>
+<div class="player" id="player"><div id="yt"></div></div>
 <div class="tools">
 <input id="q" type="search" placeholder="番号や名前で探す（例: 17、武者、ナイト）" aria-label="検索">
 <select id="decade" aria-label="年代"><option value="">すべての年代</option></select>
@@ -88,6 +104,8 @@ footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 </div>
 <div class="video" id="video"></div>
 <div id="list"></div>
+</section>
+<section id="saihan" hidden></section>
 </main>
 <footer><div class="in">
 <p>年月は最初の発売の年月です（公式の発表のほか、当時の商品の記録・コレクターの資料・Wikipedia などによる。「ごろ」は前後の番号からの推定）。BB戦士の値段は公式に載っている値段（今の値段の場合があります）、元祖SDガンダムの値段は当時の箱などに書かれた値段です。まちがいを見つけたら、YouTube のコメントで教えてください。</p>
@@ -95,38 +113,65 @@ footer .in{max-width:1180px;margin:0 auto;padding:18px 16px 40px}
 <p>このサイトはファンによる非公式のまとめです。株式会社バンダイ／BANDAI SPIRITS、株式会社サンライズ（バンダイナムコフィルムワークス）とは関係ありません。©創通・サンライズ</p>
 <p>YouTube: <a href="https://www.youtube.com/@gunplaglobal_jp">Gunpla_Global</a></p>
 </div></footer>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-const $=s=>document.querySelector(s);const cache={};let set="bb";
+const $=s=>document.querySelector(s);const cache={};let set=null,index=[],yt=null,ytReady=false,pending=null;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ts=t=>`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`;
 async function load(n){if(!cache[n])cache[n]=await (await fetch(`data/${n}.json`)).json();return cache[n]}
+window.onYouTubeIframeAPIReady=()=>{ytReady=true;if(pending){const p=pending;pending=null;openVideo(p.id,p.t)}};
+function openVideo(id,t=0,play=false){
+ if(!ytReady){pending={id,t};return}
+ if(!yt){yt=new YT.Player("yt",{videoId:id,playerVars:{start:t,rel:0,playsinline:1},events:{onReady:e=>{if(play)e.target.playVideo()}}});yt._id=id;return}
+ if(yt._id!==id){yt.loadVideoById({videoId:id,startSeconds:t});yt._id=id;if(!play)yt.pauseVideo();return}
+ yt.seekTo(t,true);if(play)yt.playVideo();
+}
+function jump(t){const d=cache[set];openVideo(d.video,t,true);$("#player").scrollIntoView({behavior:"smooth",block:"start"})}
 function label(r){if(r.no==null)return"";if(set==="ganso"&&r.sec==="新ナンバー")return`No.${r.no}`;const m=String(r.no).match(/^(\d+)(-\w)?$/);return m?`${Number(m[1])}${m[2]||""}`:""}
-function card(r,v){
+function card(r){
  const no=label(r);
- const ph=r.img?`<img class="main" loading="lazy" src="${esc(r.img)}" alt="${esc(r.name)}">`:(r.box?"":`<div class="noimg">写真なし</div>`);
- const main=r.img?ph:(r.box?`<img class="main" loading="lazy" src="${esc(r.box)}" alt="${esc(r.name)} 箱絵">`:ph);
+ const main=r.img?`<img class="main" loading="lazy" src="${esc(r.img)}" alt="${esc(r.name)}">`:(r.box?`<img class="main" loading="lazy" src="${esc(r.box)}" alt="${esc(r.name)} 箱絵">`:`<div class="noimg">写真なし</div>`);
  const box=r.img&&r.box?`<img class="box" loading="lazy" src="${esc(r.box)}" alt="箱絵">`:"";
- const cr=[r.img_host&&`<a href="${esc(r.img_src)}" target="_blank" rel="noopener">写真: ${esc(r.img_host)}</a>`,r.box&&r.box_host&&`<a href="${esc(r.box_src)}" target="_blank" rel="noopener">箱: ${esc(r.box_host)}</a>`].filter(Boolean).join("／");
- return `<article class="card"><a class="ph" ${r.t!=null?`href="https://youtu.be/${v}?t=${r.t}" target="_blank" rel="noopener"`:""}>${main}${box}${no?`<span class="no">${esc(no)}</span>`:""}</a>
+ const cr=[r.img_host&&(r.img_src?`<a href="${esc(r.img_src)}" target="_blank" rel="noopener">写真: ${esc(r.img_host)}</a>`:`写真: ${esc(r.img_host)}`),r.box&&r.box_host&&`<a href="${esc(r.box_src)}" target="_blank" rel="noopener">箱: ${esc(r.box_host)}</a>`].filter(Boolean).join("／");
+ const go=r.t!=null?`onclick="jump(${r.t});return false" href="#"`:"";
+ return `<article class="card"><a class="ph" ${go}>${main}${box}${no?`<span class="no">${esc(no)}</span>`:""}</a>
  <div class="body"><div class="name">${esc(r.name)}</div><div class="meta"><span>${esc(r.date)}</span>${r.price?`<b>${esc(r.price)}</b>`:""}</div>
  ${r.desc?`<div class="desc">${esc(r.desc)}</div>`:""}${r.note?`<div class="note">※${esc(r.note)}</div>`:""}
- <div class="foot"><span class="credit">${cr}</span>${r.t!=null?`<a class="watch" href="https://youtu.be/${v}?t=${r.t}" target="_blank" rel="noopener">▶ ${ts(r.t)}</a>`:""}</div></div></article>`}
-async function render(){
+ <div class="foot"><span class="credit">${cr}</span>${r.t!=null?`<a class="watch" ${go}>▶ ${ts(r.t)}</a>`:""}</div></div></article>`}
+async function renderList(){
  const d=await load(set);const q=$("#q").value.trim().toLowerCase();const dec=$("#decade").value;
- $("#video").innerHTML=`▶ 動画: <a href="https://youtu.be/${d.video}" target="_blank" rel="noopener">${esc(d.title)}の歴史</a>　写真や「▶ 時間」を押すと、動画のその場面へ`;
+ $("#video").innerHTML=`<a class="back" href="#/">← 一覧にもどる</a>　<a href="https://youtu.be/${d.video}" target="_blank" rel="noopener">YouTube で開く</a>　写真や「▶ 時間」を押すと、上の動画がその場面から始まります`;
  const years=[...new Set(d.rows.map(r=>(r.date.match(/\d{3}/)||[""])[0]).filter(Boolean))].sort();
  const sel=$("#decade");if(sel.dataset.set!==set){sel.innerHTML='<option value="">すべての年代</option>'+years.map(y=>`<option value="${y}">${y}0年代</option>`).join("");sel.dataset.set=set}
  const rows=d.rows.filter(r=>(!q||(`${label(r)} ${r.no??""} ${r.name} ${r.desc??""} ${r.sec??""}`).toLowerCase().includes(q))&&(!dec||r.date.startsWith(dec)));
- const groups=[];for(const r of rows){const g=r.sec||(r.no==null?"番号のないBB戦士":`${Math.floor((r.no-1)/100)*100+1}番〜${Math.floor((r.no-1)/100)*100+100}番`);if(!groups.length||groups.at(-1)[0]!==g)groups.push([g,[]]);groups.at(-1)[1].push(r)}
- $("#list").innerHTML=groups.map(([g,rs])=>`<h2 class="sec">${esc(g)}</h2><div class="grid">${rs.map(r=>card(r,d.video)).join("")}</div>`).join("")||'<p>見つかりませんでした</p>';
+ const groups=[];for(const r of rows){const g=r.sec||(set!=="bb"?"":(r.no==null?"番号のないBB戦士":`${Math.floor((r.no-1)/100)*100+1}番〜${Math.floor((r.no-1)/100)*100+100}番`));if(!groups.length||groups.at(-1)[0]!==g)groups.push([g,[]]);groups.at(-1)[1].push(r)}
+ $("#list").innerHTML=`<div class="sh"><h2>${esc(d.title)}</h2></div>`+(groups.map(([g,rs])=>`${g?`<h3 class="sec">${esc(g)}</h3>`:""}<div class="grid">${rs.map(card).join("")}</div>`).join("")||'<p>見つかりませんでした</p>');
  $("#count").textContent=`${rows.length} 件`;
 }
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{set=b.dataset.set;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));$("#q").value="";$("#decade").value="";render()});
-$("#q").oninput=render;$("#decade").onchange=render;
+async function renderHome(){
+ const groups={};for(const s of index)(groups[s.group]=groups[s.group]||[]).push(s);
+ const thumbs=await Promise.all(index.map(async s=>{const d=await load(s.key);const r=d.rows.find(r=>r.img)||{};return [s.key,r.img]}));const th=Object.fromEntries(thumbs);
+ const sai=await load("saihan");
+ $("#home").innerHTML=`<h2 class="hgroup">再販・新商品</h2>${sai.rows.length?`<p><a href="#/saihan">再販・新商品の一覧を見る →</a></p>`:`<div class="empty">再販・新商品の情報は、準備中です。</div>`}`+
+  Object.entries(groups).map(([g,ss])=>`<h2 class="hgroup">${esc(g)}</h2><div class="sgrid">${ss.map(s=>`<a class="scard" href="#/${s.key}"><div class="ph">${th[s.key]?`<img class="main" loading="lazy" src="${esc(th[s.key])}" alt="">`:""}<span class="no">${s.count}件</span></div><div class="ttl">${esc(s.title)}<small>写真・年月・動画つき</small></div></a>`).join("")}</div>`).join("");
+}
+async function renderSaihan(){
+ const d=await load("saihan");
+ $("#saihan").innerHTML=`<div class="sh"><h2>再販・新商品</h2><a class="back" href="#/">← 一覧にもどる</a></div>`+(d.rows.length?`<table class="sai"><tr><th>日付</th><th>商品</th><th>種類</th></tr>${d.rows.map(r=>`<tr><td>${esc(r.date)}</td><td>${r.url?`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a>`:esc(r.name)}</td><td>${esc(r.kind)}</td></tr>`).join("")}</table>`:`<div class="empty">準備中です。</div>`);
+}
+function nav(k){$("#nav").innerHTML=`<a class="tab" href="#/" ${!set&&k!=="saihan"?'aria-selected="true"':""}><span>トップ</span></a><a class="tab" href="#/saihan" ${k==="saihan"?'aria-selected="true"':""}><span>再販・新商品</span></a>`+(set?`<a class="tab" aria-selected="true"><span>${esc(cache[set]?.title||"")}</span></a>`:"")}
+async function route(){
+ if(!index.length)index=await (await fetch("data/index.json")).json();
+ const k=location.hash.replace(/^#\/?/,"");set=index.some(s=>s.key===k)?k:null;
+ $("#home").hidden=!!(set||k==="saihan");$("#series").hidden=!set;$("#saihan").hidden=k!=="saihan";document.body.classList.toggle("sub",!!(set||k==="saihan"));if(set)await load(set);nav(k);
+ if(set){$("#q").value="";$("#decade").value="";await renderList();openVideo(cache[set].video,0,false);window.scrollTo(0,0)}
+ else if(k==="saihan")renderSaihan();else renderHome();
+}
+$("#q").oninput=renderList;$("#decade").onchange=renderList;window.onhashchange=route;
 const th=$("#theme");let light=false;try{light=localStorage.getItem("theme")==="light"}catch(e){}
 const applyTheme=()=>{document.documentElement.dataset.theme=light?"light":"dark";th.textContent=light?"暗く表示":"明るく表示"};applyTheme();
 th.onclick=()=>{light=!light;try{localStorage.setItem("theme",light?"light":"dark")}catch(e){}applyTheme()};
-render();
+route();
 </script>
 </body>
 </html>
