@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDガンダム全番号リスト｜Gunpla_Global</title>
+<meta name="description" content="BB戦士（全428種）と元祖SDガンダム（全259種）を番号の順に。発売年月・値段・特徴と、YouTube 動画のその場面へのリンク。">
+<style>
+:root{--bg:#f6f5f2;--panel:#fff;--text:#1d1d1f;--dim:#6b6b70;--line:#e3e1dc;--accent:#c8102e;--accent-soft:#fbe9ec;--chip:#eeece7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121316;--panel:#1b1c20;--text:#ececef;--dim:#9a9aa3;--line:#2c2d33;--accent:#ff5a6e;--accent-soft:#3a1d23;--chip:#26272d}}
+:root[data-theme="dark"]{--bg:#121316;--panel:#1b1c20;--text:#ececef;--dim:#9a9aa3;--line:#2c2d33;--accent:#ff5a6e;--accent-soft:#3a1d23;--chip:#26272d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP","Yu Gothic UI",sans-serif;line-height:1.6}
+header{padding:28px 16px 8px;max-width:1080px;margin:0 auto}
+h1{font-size:clamp(22px,4vw,32px);margin:0 0 4px;letter-spacing:.02em}
+.lead{color:var(--dim);margin:0 0 16px;font-size:15px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.tab{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:8px 16px;border-radius:999px;font-size:15px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:1080px;margin:0 auto;padding:0 16px 48px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.bar input,.bar select{font:inherit;font-size:15px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}
+.bar input{flex:1 1 220px;min-width:0}
+.count{color:var(--dim);font-size:14px}
+.video{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:15px}
+.video a{color:var(--accent);font-weight:700}
+ul.list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+li.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:64px 1fr auto;gap:4px 12px;align-items:start}
+.no{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;font-size:15px}
+.name{font-weight:700;font-size:16px}
+.meta{color:var(--dim);font-size:13px;display:flex;gap:10px;flex-wrap:wrap}
+.desc{grid-column:2/4;font-size:14px}
+.note{grid-column:2/4;font-size:13px;color:var(--accent)}
+.watch{font-size:13px;white-space:nowrap;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:999px;padding:2px 10px}
+.src{color:var(--dim);font-size:12px}
+.sec{grid-column:1/-1;margin:14px 0 2px;font-weight:800;font-size:15px;color:var(--dim)}
+footer{max-width:1080px;margin:0 auto;padding:16px;color:var(--dim);font-size:13px;border-top:1px solid var(--line)}
+footer a{color:inherit}
+@media (max-width:560px){li.item{grid-template-columns:52px 1fr}.watch{grid-column:2;justify-self:start}.desc,.note{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header>
+<h1>SDガンダム 全番号リスト</h1>
+<p class="lead">BB戦士・元祖SDガンダムを、番号の順に全部。YouTube「Gunpla_Global」の「〇〇の歴史」シリーズのまとめです。</p>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" data-set="bb" aria-selected="true">BB戦士（428）</button>
+<button class="tab" role="tab" data-set="ganso" aria-selected="false">元祖SDガンダム（259）</button>
+</div>
+</header>
+<main>
+<div class="video" id="video"></div>
+<div class="bar">
+<input id="q" type="search" placeholder="番号や名前で探す（例: 17、武者、ナイト）" aria-label="検索">
+<select id="decade" aria-label="年代"><option value="">すべての年代</option></select>
+<span class="count" id="count"></span>
+</div>
+<ul class="list" id="list"></ul>
+</main>
+<footer>
+<p>年月は最初の発売の年月です（公式の発表のほか、当時の商品の記録・コレクターの資料・Wikipedia などによる。「ごろ」は前後の番号からの推定）。BB戦士の値段は公式に載っている値段（今の値段の場合があります）、元祖SDガンダムの値段は当時の箱などに書かれた値段です。まちがいを見つけたら、YouTube のコメントで教えてください。</p>
+<p>このサイトはファンによる非公式のまとめです。株式会社バンダイ／BANDAI SPIRITS、株式会社サンライズ（バンダイナムコフィルムワークス）とは関係ありません。©創通・サンライズ</p>
+<p>YouTube: <a href="https://www.youtube.com/@gunplaglobal_jp">Gunpla_Global</a></p>
+</footer>
+<script>
+const $=s=>document.querySelector(s);const cache={};let set="bb";
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ts=t=>`${Math.floor(t/60)}:${String(t%60).padStart(2,"0")}`;
+async function load(n){if(!cache[n])cache[n]=await (await fetch(`data/${n}.json`)).json();return cache[n]}
+async function render(){
+ const d=await load(set);const q=$("#q").value.trim().toLowerCase();const dec=$("#decade").value;
+ $("#video").innerHTML=`▶ 動画で見る: <a href="https://youtu.be/${d.video}" target="_blank" rel="noopener">${esc(d.title)}の歴史</a>　各商品の「▶ 時間」を押すと、動画のその場面へ飛べます`;
+ const years=[...new Set(d.rows.map(r=>(r.date.match(/\d{3}/)||[""])[0]).filter(Boolean))].sort();
+ const sel=$("#decade");if(sel.dataset.set!==set){sel.innerHTML='<option value="">すべての年代</option>'+years.map(y=>`<option value="${y}">${y}0年代</option>`).join("");sel.dataset.set=set}
+ const rows=d.rows.filter(r=>(!q||(`${r.no??""} ${r.name} ${r.desc??""} ${r.sec??""}`).toLowerCase().includes(q))&&(!dec||r.date.startsWith(dec)));
+ let html="",last="";
+ for(const r of rows){
+  if(r.sec&&r.sec!==last){html+=`<li class="sec">${esc(r.sec)}</li>`;last=r.sec}
+  const no=r.no==null?"―":(set==="ganso"&&r.sec==="新ナンバー"?`No.${r.no}`:/^\d/.test(r.no)?`${Number(String(r.no).split("-")[0])}${String(r.no).includes("-")?"-"+String(r.no).split("-")[1]:""}番`:"―");
+  html+=`<li class="item"><span class="no">${esc(no)}</span><div><div class="name">${esc(r.name)}</div><div class="meta"><span>${esc(r.date)}</span>${r.price?`<span>${esc(r.price)}</span>`:""}${r.src?`<a class="src" href="${esc(r.src)}" target="_blank" rel="noopener">出典</a>`:""}</div></div>${r.t!=null?`<a class="watch" href="https://youtu.be/${d.video}?t=${r.t}" target="_blank" rel="noopener">▶ ${ts(r.t)}</a>`:"<span></span>"}${r.desc?`<div class="desc">${esc(r.desc)}</div>`:""}${r.note?`<div class="note">※${esc(r.note)}</div>`:""}</li>`;
+ }
+ $("#list").innerHTML=html||'<li class="item"><span></span><div>見つかりませんでした</div></li>';
+ $("#count").textContent=`${rows.length} 件`;
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{set=b.dataset.set;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));$("#q").value="";$("#decade").value="";render()});
+$("#q").oninput=render;$("#decade").onchange=render;render();
+</script>
+</body>
+</html>
