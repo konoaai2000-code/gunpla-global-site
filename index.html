@@ -51,10 +51,8 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 56px}
 .ph img.box{position:absolute;right:8px;top:8px;width:38%;border-radius:6px;border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.6);background:#fff}
 .ph .no{position:absolute;left:0;bottom:12px;background:var(--red);color:#fff;font-family:"Dela Gothic One",sans-serif;font-size:18px;padding:2px 14px 2px 10px;clip-path:polygon(0 0,100% 0,88% 100%,0 100%)}
 .ph .noimg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at 50% 40%,#1b2a1f,#0b0d10)}
-.haro{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8fe39a,#2fa84a 60%,#1d7a33);position:relative;box-shadow:0 6px 14px rgba(0,0,0,.5);animation:haro 1.6s ease-in-out infinite}
-.haro:before{content:"";position:absolute;left:3px;right:3px;top:42px;height:3px;background:#145a24;border-radius:2px}
-.haro i{position:absolute;top:22px;width:11px;height:11px;border-radius:50%;background:#ff3b30;box-shadow:0 0 6px #ff3b30}
-.haro i:first-child{left:20px}.haro i:last-child{right:20px}
+.haro{width:110px;height:110px;border-radius:50%;object-fit:cover;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.5);animation:haro 1.6s ease-in-out infinite}
+.noimg small{font-size:9px;color:var(--dim)}
 .say{position:relative;background:#fff;color:#111;font-weight:900;font-size:13px;line-height:1.4;padding:6px 12px;border-radius:14px;text-align:center}
 .say:before{content:"";position:absolute;left:50%;top:-6px;margin-left:-6px;border:6px solid transparent;border-top:0;border-bottom-color:#fff}
 @keyframes haro{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -141,7 +139,7 @@ function jump(t){const d=cache[set];openVideo(d.video,t,true);$("#player").scrol
 function label(r){if(r.no==null)return"";if(set==="ganso"&&r.sec==="新ナンバー")return`No.${r.no}`;const m=String(r.no).match(/^(\d+)(-\w)?$/);return m?`${Number(m[1])}${m[2]||""}`:""}
 function card(r){
  const no=label(r);
- const main=r.img?`<img class="main" loading="lazy" src="${esc(r.img)}" alt="${esc(r.name)}">`:(r.box?`<img class="main" loading="lazy" src="${esc(r.box)}" alt="${esc(r.name)} 箱絵">`:`<div class="noimg"><div class="haro"><i></i><i></i></div><div class="say">ハロ！ハロ！<br>シャシン、ナイ！</div></div>`);
+ const main=r.img?`<img class="main" loading="lazy" src="${esc(r.img)}" alt="${esc(r.name)}">`:(r.box?`<img class="main" loading="lazy" src="${esc(r.box)}" alt="${esc(r.name)} 箱絵">`:`<div class="noimg"><img class="haro" src="img/haro_${['green','red','orange','blue','yellow'][[...(r.name||'')].length%5]}.webp" alt="ハロ"><div class="say">ハロ！ハロ！<br>シャシン、ナイ！</div><small>写真: BANDAI SPIRITS ©創通・サンライズ</small></div>`);
  const box=r.img&&r.box?`<img class="box" loading="lazy" src="${esc(r.box)}" alt="箱絵">`:"";
  const cr=[r.img_host&&(r.img_src?`<a href="${esc(r.img_src)}" target="_blank" rel="noopener">写真: ${esc(r.img_host)}</a>`:`写真: ${esc(r.img_host)}`),r.box&&r.box_host&&`<a href="${esc(r.box_src)}" target="_blank" rel="noopener">箱: ${esc(r.box_host)}</a>`].filter(Boolean).join("／");
  const go=r.t!=null?`onclick="jump(${r.t});return false" href="#"`:"";
